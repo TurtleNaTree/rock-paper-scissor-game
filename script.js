@@ -6,8 +6,8 @@ const regEx = {
     paper: /^Paper$/i
 };
 
-console.log(computerPlay());
-console.log(checkPlayerInput(prompt("Enter Rock, Paper or scissor")));
+//console.log(computerPlay());
+console.log(playRound(checkPlayerInput(prompt("Enter Rock, Paper or Scissor")), computerPlay()));
 
 // returns a random string that is rock, paper or scissor
 function computerPlay(){
@@ -27,8 +27,36 @@ function computerPlay(){
 }
 
 // plays a game of rock paper scissors
-function playRound(){
-
+function playRound(playerSelection, computerSelection){
+    console.log(`computer chose ${computerSelection}`);
+    console.log(`player chose ${playerSelection}`);
+    if (playerSelection === computerSelection){
+        return `Draw! ${playerSelection} and ${computerSelection} are even.`;
+    }
+    else {
+        switch (playerSelection){
+            case "Rock":
+                if (computerSelection === "Paper"){
+                    return `You lose! ${computerSelection} beats ${playerSelection}.`;
+                }
+                else
+                    return `You win! ${playerSelection} beats ${computerSelection}`;
+            case "Paper":
+                if (computerSelection === "Scissor"){
+                    return `You lose! ${computerSelection} beats ${playerSelection}.`;
+                }
+                else
+                    return `You win! ${playerSelection} beats ${computerSelection}`;
+            case "Scissor":
+                if (computerSelection === "Rock"){
+                    return `You lose! ${computerSelection} beats ${playerSelection}.`;
+                }
+                else
+                    return `You win! ${playerSelection} beats ${computerSelection}`;
+            default:
+                console.error(`Something went wrong in playRound. playerSelection is ${playerSelection} and computerSelection is ${computerSelection}.`);
+        }
+    }
 }
 
 
