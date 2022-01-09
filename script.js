@@ -6,8 +6,7 @@ const regEx = {
     paper: /^Paper$/i
 };
 
-//console.log(computerPlay());
-console.log(playRound(checkPlayerInput(prompt("Enter Rock, Paper or Scissor")), computerPlay()));
+game();
 
 // returns a random string that is rock, paper or scissor
 function computerPlay(){
@@ -57,6 +56,26 @@ function playRound(playerSelection, computerSelection){
                 console.error(`Something went wrong in playRound. playerSelection is ${playerSelection} and computerSelection is ${computerSelection}.`);
         }
     }
+}
+
+// plays 5 rounds of rock paper scissors
+function game(){
+    let playerSelection;
+    let roundCount = 0;
+    
+    while (roundCount !== 5){
+        playerSelection = prompt("Enter Rock, Paper or Scissor.");
+        playerSelection = checkPlayerInput(playerSelection);
+
+        if (playerSelection === null){
+            console.log("Invalid input try again.");
+        }
+        else{
+            console.log(playRound(playerSelection, computerPlay()));
+            roundCount++;
+        }
+    }
+
 }
 
 
