@@ -6,7 +6,7 @@ const regEx = {
     paper: /^Paper$/i
 };
 
-game();
+//game();
 
 // returns a random string that is rock, paper or scissor
 function computerPlay(){

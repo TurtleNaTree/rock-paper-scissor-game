@@ -1,0 +1,35 @@
+/*  main css file for rock paper scissors */
+
+.gameBody, .playerScore, .computerScore, .choiceSection, .scoreSection
+, .roundSection {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.gameBody {
+    flex-direction: column; 
+}
+
+
+
+.playerScore, .computerScore {
+    flex-direction: column;
+    
+}
+
+p {
+    margin-left: 30%;
+    margin-right: 30%;
+    padding: 0px;
+}
+ul {
+    list-style: none;
+    padding: 0px 30px;
+   
+}
+li, ul {
+    margin-left: 30%;
+    margin-right: 30%;
+    
+}
