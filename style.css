@@ -1,6 +1,6 @@
 /*  main css file for rock paper scissors */
 
-.gameBody, .playerScore, .computerScore, .choiceSection, .scoreSection
+.gameBody, .playerScoreSection, .computerScoreSection, .choiceSection, .scoreSection
 , .roundSection {
     display: flex;
     justify-content: center;
@@ -13,9 +13,19 @@
 
 
 
-.playerScore, .computerScore {
+.playerScoreSection, .computerScoreSection {
     flex-direction: column;
     
+}
+
+.playerChoice {
+    max-width: 64px;
+    max-height: 64px;
+}
+
+.playerChoice:hover {
+    transform: scale(1.3);
+    cursor: pointer;
 }
 
 p {

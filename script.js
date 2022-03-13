@@ -5,8 +5,21 @@ const regEx = {
     scissor: /^Scissor|Scissors$/i,
     paper: /^Paper$/i
 };
+const playerScore = document.querySelector("#playerScore");
+const computerScore = document.querySelector("#computerScore");
+
+const playerChoice = Array.from(document.querySelectorAll(".playerChoice"));
+
+console.log(playerChoice);
+console.log(+document.querySelector("#playerScore").textContent + 1);
+playerChoice.forEach(initPlayerChoice);
 
 //game();
+
+
+function initPlayerChoice(playerSelection){
+    playerSelection.addEventListener("click", () => playRound(playerSelection.id, computerPlay()));
+}
 
 // returns a random string that is rock, paper or scissor
 function computerPlay(){
@@ -36,22 +49,31 @@ function playRound(playerSelection, computerSelection){
         switch (playerSelection){
             case "Rock":
                 if (computerSelection === "Paper"){
+                    increaseScore("computer");
                     return `You lose! ${computerSelection} beats ${playerSelection}.`;
                 }
-                else
+                else{
+                    increaseScore("player");
                     return `You win! ${playerSelection} beats ${computerSelection}`;
+                }
             case "Paper":
                 if (computerSelection === "Scissor"){
+                    increaseScore("computer");
                     return `You lose! ${computerSelection} beats ${playerSelection}.`;
                 }
-                else
+                else{
+                    increaseScore("player");
                     return `You win! ${playerSelection} beats ${computerSelection}`;
+                }
             case "Scissor":
                 if (computerSelection === "Rock"){
+                    increaseScore("computer");
                     return `You lose! ${computerSelection} beats ${playerSelection}.`;
                 }
-                else
+                else{
+                    increaseScore("player");
                     return `You win! ${playerSelection} beats ${computerSelection}`;
+                }
             default:
                 console.error(`Something went wrong in playRound. playerSelection is ${playerSelection} and computerSelection is ${computerSelection}.`);
         }
@@ -95,4 +117,12 @@ function checkPlayerInput(playerSelection){
         return null;
     }
 
+}
+
+function increaseScore(user){
+    if (user == "player"){
+        playerScore.textContent = +playerScore.textContent + 1;
+    }
+    else
+        computerScore.textContent = +computerScore.textContent + 1;
 }
