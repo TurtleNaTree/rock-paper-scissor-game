@@ -12,6 +12,7 @@ const playerChoice = Array.from(document.querySelectorAll(".playerChoice"));
 
 console.log(playerChoice);
 console.log(+document.querySelector("#playerScore").textContent + 1);
+
 playerChoice.forEach(initPlayerChoice);
 
 //game();
@@ -42,6 +43,7 @@ function computerPlay(){
 function playRound(playerSelection, computerSelection){
     console.log(`computer chose ${computerSelection}`);
     console.log(`player chose ${playerSelection}`);
+    showRound(playerSelection, computerSelection);
     if (playerSelection === computerSelection){
         return `Draw! ${playerSelection} and ${computerSelection} are even.`;
     }
@@ -117,6 +119,28 @@ function checkPlayerInput(playerSelection){
         return null;
     }
 
+}
+
+function showRound(playerSelection, computerSelection){
+    const game = document.querySelector(".gameBody");
+    const roundSection = document.createElement("ul"); 
+    const playerGraphic = document.createElement("img");
+    const computerGraphic = document.createElement("img");
+
+    roundSection.classList.toggle("roundSection");
+    playerGraphic.src = `imgs/${playerSelection}.png`;
+    computerGraphic.src = `imgs/${computerSelection}.png`;
+
+    for (let index = 0; index < 3; index++){
+        const li = document.createElement("li");
+        roundSection.appendChild(li);
+    }
+
+    roundSection.childNodes[0].appendChild(playerGraphic);
+    roundSection.childNodes[1].innerText = "VS";
+    roundSection.childNodes[2].appendChild(computerGraphic);
+
+    game.appendChild(roundSection);
 }
 
 function increaseScore(user){
