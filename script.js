@@ -1,22 +1,12 @@
 
 
-const regEx = {
-    rock: /^Rock$/i,
-    scissor: /^Scissor|Scissors$/i,
-    paper: /^Paper$/i
-};
 const playerScore = document.querySelector("#playerScore");
 const computerScore = document.querySelector("#computerScore");
 
 const playerChoice = Array.from(document.querySelectorAll(".playerChoice"));
 
-console.log(playerChoice);
-console.log(+document.querySelector("#playerScore").textContent + 1);
 
 playerChoice.forEach(initPlayerChoice);
-
-//game();
-
 
 function initPlayerChoice(playerSelection){
     playerSelection.addEventListener("click", () => playRound(playerSelection.id, computerPlay()));
@@ -43,6 +33,7 @@ function computerPlay(){
 function playRound(playerSelection, computerSelection){
     console.log(`computer chose ${computerSelection}`);
     console.log(`player chose ${playerSelection}`);
+    clearRound();
     showRound(playerSelection, computerSelection);
     if (playerSelection === computerSelection){
         return `Draw! ${playerSelection} and ${computerSelection} are even.`;
@@ -82,45 +73,6 @@ function playRound(playerSelection, computerSelection){
     }
 }
 
-// plays 5 rounds of rock paper scissors
-function game(){
-    let playerSelection;
-    let roundCount = 0;
-    
-    while (roundCount !== 5){
-        playerSelection = prompt("Enter Rock, Paper or Scissor.");
-        playerSelection = checkPlayerInput(playerSelection);
-
-        if (playerSelection === null){
-            console.log("Invalid input try again.");
-        }
-        else{
-            console.log(playRound(playerSelection, computerPlay()));
-            roundCount++;
-        }
-    }
-
-}
-
-
-// checks if players input is valid (they must enter scissor, paper, or rock)
-function checkPlayerInput(playerSelection){
-    if (regEx.rock.test(playerSelection)){
-        return "Rock";
-    }
-    else if (regEx.paper.test(playerSelection)){
-        return "Paper";
-    }
-    else if (regEx.scissor.test(playerSelection)){
-        return "Scissor";
-    }
-    else{
-        console.error(`Wrong input found player selection is ${playerSelection}. In checkPlayerInput.`);
-        return null;
-    }
-
-}
-
 function showRound(playerSelection, computerSelection){
     const game = document.querySelector(".gameBody");
     const roundSection = document.createElement("ul"); 
@@ -130,6 +82,7 @@ function showRound(playerSelection, computerSelection){
     roundSection.classList.toggle("roundSection");
     playerGraphic.src = `imgs/${playerSelection}.png`;
     computerGraphic.src = `imgs/${computerSelection}.png`;
+    computerGraphic.classList.toggle("computerChoice");
 
     for (let index = 0; index < 3; index++){
         const li = document.createElement("li");
@@ -143,6 +96,15 @@ function showRound(playerSelection, computerSelection){
     game.appendChild(roundSection);
 }
 
+function clearRound (){
+    const round = document.querySelector(".roundSection");
+
+    if (round){
+        const game = document.querySelector(".gameBody");
+        game.removeChild(round);
+    }
+}
+
 function increaseScore(user){
     if (user == "player"){
         playerScore.textContent = +playerScore.textContent + 1;
@@ -150,3 +112,4 @@ function increaseScore(user){
     else
         computerScore.textContent = +computerScore.textContent + 1;
 }
+
