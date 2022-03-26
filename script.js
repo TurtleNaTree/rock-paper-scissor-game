@@ -98,18 +98,46 @@ function showRound(playerSelection, computerSelection){
 
 function clearRound (){
     const round = document.querySelector(".roundSection");
-
+    const winner = document.querySelector(".winnerSection");
+    const game = document.querySelector(".gameBody");
     if (round){
-        const game = document.querySelector(".gameBody");
-        game.removeChild(round);
+         game.removeChild(round);
+    }
+
+    if (winner){
+        game.removeChild(winner);
     }
 }
 
 function increaseScore(user){
     if (user == "player"){
         playerScore.textContent = +playerScore.textContent + 1;
+        if (playerScore.textContent == "5") {
+            showWinner("You");
+            playerScore.textContent = "0";
+            computerScore.textContent = "0";
+        }
+            
     }
-    else
+    else {
         computerScore.textContent = +computerScore.textContent + 1;
+        if (computerScore.textContent == "5"){
+            showWinner("Computer");
+            playerScore.textContent = "0";
+            computerScore.textContent = "0";
+        }
+           
+    }
+        
+}
+
+function showWinner(winner){
+    const game = document.querySelector(".gameBody");
+    const winnerText = document.createElement("h1");
+
+    winnerText.classList.toggle("winnerSection");
+    winnerText.textContent = `${winner} Win!`;
+
+    game.appendChild(winnerText);
 }
 
